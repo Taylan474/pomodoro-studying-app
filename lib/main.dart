@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensures proper initialization before any Flutter operations
-  final prefs = await SharedPreferences.getInstance(); // Get SharedPreferences instance
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures proper initialization before any Flutter operations
+  final prefs =
+  await SharedPreferences.getInstance(); // Get SharedPreferences instance
 
   // Check if the preference for dark mode exists
   final hasSavedTheme = prefs.containsKey('isDarkMode');
@@ -18,7 +20,8 @@ void main() async {
     // If no saved theme, auto-detect based on system/browser brightness
     final brightness = WidgetsBinding.instance.window.platformBrightness;
     isDark = brightness == Brightness.dark;
-    prefs.setBool('isDarkMode', isDark); // Save the detected theme for future use
+    prefs.setBool(
+        'isDarkMode', isDark); // Save the detected theme for future use
   }
 
   // Run the app with the initial theme (either light or dark)
@@ -39,34 +42,43 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _isDark = widget.initialIsDark; // Set the initial theme based on passed parameter
+    _isDark =
+        widget.initialIsDark; // Set the initial theme based on passed parameter
   }
 
   // A method to toggle between light and dark mode
   void _toggleTheme() async {
     setState(() => _isDark = !_isDark); // Toggle theme
-    final prefs = await SharedPreferences.getInstance(); // Get SharedPreferences instance
-    prefs.setBool('isDarkMode', _isDark); // Save the current theme mode for future use
+    final prefs =
+    await SharedPreferences.getInstance(); // Get SharedPreferences instance
+    prefs.setBool(
+        'isDarkMode', _isDark); // Save the current theme mode for future use
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Disables the debug banner
+      title: 'Pomodoro Study Timer',
 
       // Light theme settings
       theme: ThemeData(
         useMaterial3: true, // Use Material 3 design system
-        textTheme: GoogleFonts.poppinsTextTheme(), // Use Poppins font for the text
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo), // Generate color scheme using indigo as base
+        textTheme:
+        GoogleFonts.poppinsTextTheme(), // Use Poppins font for the text
+        colorScheme: ColorScheme.fromSeed(
+            seedColor:
+            Colors.indigo), // Generate color scheme using indigo as base
       ),
 
       // Dark theme settings
       darkTheme: ThemeData(
         useMaterial3: true, // Use Material 3 design system
-        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme), // Use Poppins font with dark theme
+        textTheme: GoogleFonts.poppinsTextTheme(
+            ThemeData.dark().textTheme), // Use Poppins font with dark theme
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo, // Generate color scheme using indigo for dark mode
+          seedColor:
+          Colors.indigo, // Generate color scheme using indigo for dark mode
           brightness: Brightness.dark,
         ),
       ),
